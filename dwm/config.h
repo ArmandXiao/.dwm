@@ -28,19 +28,21 @@ static const char dmenufont[]       = "Source Code Pro:size=12";
 
 static const char col_1[]  = "#282c34"; /* background color of bar */
 static const char col_2[]  = "#282c34"; /* border color unfocused windows */
-static const char col_3[]  = "#d7d7d7";
-static const char col_4[]  = "#924441"; /* border color focused windows and tags */
+static const char col_3[]  = "#CCCCCC"; /* color of fonts */
+static const char col_4[]  = "#666699"; /* color of selected tags */
+static const char col_5[]  = "#CC3333"; /* border color windows */
+
 /* bar opacity 
  * 0xff is no transparency.
  * 0xee adds wee bit of transparency.
  * Play with the value to get desired transparency.
  */
-static const unsigned int baralpha    = 0xee; 
+static const unsigned int baralpha    = 0x7e; 
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]        = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_3, col_1, col_2 },
-	[SchemeSel]  = { col_3, col_4,  col_4 },
+	[SchemeSel]  = { col_3, col_4,  col_5 },
 };
 static const unsigned int alphas[][3] = {
 	/*               fg      bg        border     */
@@ -105,7 +107,7 @@ static const char *termcmd[]     = { "alacritty", NULL };
 /* static const char *termcmd[]     = { "st", "-e fish", NULL }; */
 
 /* customized apps launch */
-static const char *browser[] = { "vivaldi-stable", NULL };
+static const char *browser[] = { "qutebrowser", NULL };
 static const char *flameshot[] = { "flameshot", "gui", NULL };
 
 static Key keys[] = {
