@@ -28,9 +28,11 @@ static const int vertpadbar        = 7;   /* vertical padding for statusbar */
  * Arch repos and is listed as a dependency for this build. JoyPixels is also
  * a hard dependency and makes colored fonts and emojis possible.
  */
-static const char *fonts[]     = {"Mononoki Nerd Font:size=9:antialias=true:autohint=true",
-                                  "Hack:size=8:antialias=true:autohint=true",
-                                  "JoyPixels:size=10:antialias=true:autohint=true"
+
+// change the font to adjust the bar size
+static const char *fonts[]     = {"Mononoki Nerd Font:size=12:antialias=true:autohint=true",
+                                  "Hack:size=12:antialias=true:autohint=true",
+                                  "JoyPixels:size=12:antialias=true:autohint=true"
 						     	};
 
 static const char dmenufont[]       = "Source Code Pro:size=12";
@@ -62,7 +64,9 @@ static const unsigned int alphas[][3] = {
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 
-static const char *tags[] = { "","","","","","", ""};
+// static const char *tags[] = { "dev", "www","pdf","com","app","mail", "oth"};
+// unicode also works
+static const char *tags[] = {"壹","贰","叁","肆","伍","陆"};    // ,"柒"、"捌"、"玖"、"拾"
 
 
 static const Rule rules[] = {
@@ -83,10 +87,10 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 #include "layouts.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[T]",      tile },    /* first entry is default */
-	{ "[F]",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
-	{ "HHH",      grid },
+	{ "[TILE]",      tile },    /* first entry is default */
+	{ "[FLOAT]",      NULL },    /* no layout function means floating behavior */
+	{ "[MONO]",      monocle },
+	{ "[GRID]",      grid },
 	{ NULL,       NULL },
 };
 
@@ -116,7 +120,7 @@ static const char *termcmd[]     = { "alacritty", NULL };
 /* static const char *termcmd[]     = { "st", "-e fish", NULL }; */
 
 /* customized apps launch */
-static const char *browser[] = { "qutebrowser", NULL };
+static const char *browser[] = { "brave", NULL };
 static const char *flameshot[] = { "flameshot", "gui", NULL };
 
 static Key keys[] = {
