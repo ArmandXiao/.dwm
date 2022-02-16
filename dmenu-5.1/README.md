@@ -12,8 +12,11 @@ Afterwards enter the following command to build and install dmenu
 (if necessary as root):
 
 ```sh
-make clean install
+sudo make clean install
 ```
 
 ## Patches
-
+- dmenu-center-4.8.diff
+- dmenu-fuzzymatch-4.9.diff
+    - this includes **case insensitive**
+- dmenu-prefixcompletion-flag-4.9.diff

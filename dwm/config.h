@@ -101,6 +101,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+
 #define CMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
@@ -112,7 +113,9 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 /* If you are using the standard dmenu program, use the following. */
 //static const char *dmenucmd[]    = { "dmenu_run", "-p", "Run: ", NULL };
 /* If you are using the dmenu-distrotube-git program, use the following for a cooler dmenu! */
-static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; 
+//static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; 
+//
+static const char *dmenucmd[]    = { "dmenu_run", "-l", "10", "-p", "run"}; 
 
 /* the st terminal with tabbed */
 static const char *termcmd[]     = { "alacritty", NULL };
@@ -133,42 +136,43 @@ static Key keys[] = {
 	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 
-	/* modifier             key        function        argument */
-	{ MODKEY,               XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,               XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,               XK_b,      togglebar,      {0} },
-	{ MODKEY,               XK_j,      rotatestack,    {.i = +1 } },
-	{ MODKEY,               XK_k,      rotatestack,    {.i = -1 } },
-	{ MODKEY,               XK_h,      focusstack,     {.i = +1 } },
-	{ MODKEY,               XK_l,      focusstack,     {.i = -1 } },
-	{ MODKEY,               XK_plus,      incnmaster,     {.i = +1 } },
-	{ MODKEY,               XK_minus,      incnmaster,     {.i = -1 } },
-	{ MODKEY,               XK_Left,      setmfact,       {.f = -0.05} },
-	{ MODKEY,               XK_Right,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,   XK_Return, zoom,           {0} },
-	{ MODKEY,               XK_Tab,    view,           {0} },
-	{ MODKEY,               XK_w,      killclient,     {0} },
+	/* modifier             key             function                argument */
+	{ MODKEY,               XK_p,           spawn,                  {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,     XK_p,           runDmenuBrowseScript,   {} },
+	{ MODKEY,               XK_Return,      spawn,                  {.v = termcmd } },
+	{ MODKEY,               XK_b,           togglebar,              {0} },
+	{ MODKEY,               XK_j,           rotatestack,            {.i = +1 } },
+	{ MODKEY,               XK_k,           rotatestack,            {.i = -1 } },
+	{ MODKEY,               XK_h,           focusstack,             {.i = +1 } },
+	{ MODKEY,               XK_l,           focusstack,             {.i = -1 } },
+	{ MODKEY,               XK_plus,        incnmaster,             {.i = +1 } },
+	{ MODKEY,               XK_minus,       incnmaster,             {.i = -1 } },
+	{ MODKEY,               XK_Left,        setmfact,               {.f = -0.05} },
+	{ MODKEY,               XK_Right,       setmfact,               {.f = +0.05} },
+	{ MODKEY|ControlMask,   XK_Return,      zoom,                   {0} },
+	{ MODKEY,               XK_Tab,         view,                   {0} },
+	{ MODKEY,               XK_w,           killclient,             {0} },
 
     /* Layout manipulation */
 	//{ MODKEY,               XK_Tab,    cyclelayout,    {.i = -1 } },
 	//{ MODKEY|ShiftMask,     XK_Tab,    cyclelayout,    {.i = +1 } },
-	{ MODKEY,               XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,     XK_space,  togglefloating, {0} },
+	{ MODKEY,               XK_space,       setlayout,      {0} },
+	{ MODKEY|ShiftMask,     XK_space,       togglefloating, {0} },
 
     /* Switch to specific layouts */
-	{ MODKEY,               XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,               XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,               XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,               XK_g,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,               XK_t,           setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,               XK_f,           setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,               XK_m,           setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,               XK_g,           setlayout,      {.v = &layouts[3]} },
 
-	{ MODKEY,               XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,     XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,               XK_0,           view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,     XK_0,           tag,            {.ui = ~0 } },
 
     /* Switching between monitors */
-	{ MODKEY,               XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,               XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,     XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,     XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,               XK_comma,       focusmon,       {.i = -1 } },
+	{ MODKEY,               XK_period,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,     XK_comma,       tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,     XK_period,      tagmon,         {.i = +1 } },
 	
     
 	TAGKEYS(                  XK_1,          0)
