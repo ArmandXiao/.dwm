@@ -39,7 +39,7 @@ static const char dmenufont[]       = "Source Code Pro:size=12";
 
 static const char col_1[]  = "#282c34"; /* background color of bar */
 static const char col_2[]  = "#282c34"; /* border color unfocused windows */
-static const char col_3[]  = "#101010"; /* color of fonts */
+static const char col_3[]  = "#ffffff"; /* color of fonts */
 static const char col_4[]  = "#666699"; /* color of selected tags */
 static const char col_5[]  = "#CC3333"; /* border color windows */
 
@@ -48,7 +48,7 @@ static const char col_5[]  = "#CC3333"; /* border color windows */
  * 0xee adds wee bit of transparency.
  * Play with the value to get desired transparency.
  */
-static const unsigned int baralpha    = 0x7e; 
+static const unsigned int baralpha    = 0xee; 
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]        = {
 	/*               fg         bg         border   */
